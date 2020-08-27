@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // 对应随机明星
+        const random = Math.random().toFixed(1)*10
+        // value
+        const val = Math.random().toFixed(1)*20
+        // 从session获取的对象
+        let obj = sessionStorage.getItem('starInfo') || null;
+        // 对象中的每个小对象
+        const item = '{"' + random +'":"' + val + '"}'
+        // 判断首次是否有session
+        if(obj){
+            obj = JSON.parse(obj)
+            console.log('43obj',obj)
+            // 判断obj中是否有相同key
+            if(obj[random]){
+                obj[random] = val
+            }else {
+                obj = Object.assign(obj,JSON.parse(item))
+            }
+            sessionStorage.setItem('starInfo',JSON.stringify(obj))
+        }else {
+            obj = item
+            sessionStorage.setItem('starInfo',obj)
+        }
+        console.log('52o s s sbj',obj)
+
+    </script>
+</body>
+</html>
